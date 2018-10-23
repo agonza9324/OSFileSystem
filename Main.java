@@ -1,5 +1,5 @@
 package OSProjPack;
-
+//Don't forget to rename this if running in IDE unless you put it under a package names OSProjPack
 import java.util.Scanner;
 
 public class Main {
