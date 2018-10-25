@@ -20,6 +20,7 @@ public class ProjectFinal {
          Scanner scan = new Scanner(System.in);
          Directory root = new Directory("H:/");
          Directory current=root;
+        /*ArrayList<Directory> d1 = new ArrayList<Directory>(); this is to keep a list of arrays so commands like rmdir, mdkir, and cd can be coded easier */
         System.out.println("Possible Commands");
         System.out.println("---------------------");
         System.out.println("ls: List directories");
@@ -140,6 +141,7 @@ public class ProjectFinal {
     public static void mkdir(Directory current,String detail) {
         
         current.add(new Directory(detail));
+        // d1.add(current);
         
     }
     public static void rmdir() {
