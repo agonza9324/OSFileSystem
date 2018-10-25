@@ -127,7 +127,7 @@ public class ProjectFinal {
         current.printTree();
     }
     public static void pwd() {
-        
+        System.out.println("Working Directory: " + System.getProperty("user.dir"));
     }
     public static void cd(Directory root, Directory current, String detail) {
         
