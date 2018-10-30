@@ -27,7 +27,6 @@ public class ProjectFinal {
         System.out.println("pwd: print working directory");
         System.out.println("cd: Change directory");
         System.out.println("touch: create file");
-        System.out.println("nano: edit file");
         System.out.println("mkdir: create directory");
         System.out.println("rmdir: remove directory");
         System.out.println("cat: reads content of file");
@@ -59,9 +58,6 @@ public class ProjectFinal {
                     break;
                 case "touch":
                     touch(current,detail);
-                    break;
-                case "nano":
-                    nano();
                     break;
                 case "mkdir":
                     mkdir(current,detail);
