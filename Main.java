@@ -135,8 +135,6 @@ public class ProjectFinal {
     public static void touch(Directory current,String detail) {
         current.add(new File(detail));
     }
-    public static void nano() {
-    }
             
     public static void mkdir(Directory current,String detail) {
         
@@ -145,9 +143,7 @@ public class ProjectFinal {
         
     }
     public static void rmdir() {
-        
-        
-        
+          
     }
     public static void cat() {
         
