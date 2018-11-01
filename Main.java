@@ -1,21 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projectfinal;
 
 import java.util.Scanner;
-
-/**
- *
- * @author tappel2
- */
 public class ProjectFinal {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
          Scanner scan = new Scanner(System.in);
          Directory root = new Directory("H:/");
@@ -30,6 +16,7 @@ public class ProjectFinal {
         System.out.println("mkdir: create directory");
         System.out.println("rmdir: remove directory");
         System.out.println("cat: reads content of file");
+        System.out.println("exit: exits the simulation");
         System.out.println("---------------------");
         //System.out.println("Type rmdir to delete a directory."); We need to figure out how to do this
         //Input
@@ -130,13 +117,11 @@ public class ProjectFinal {
     }
     public static void touch(Directory current,String detail) {
         current.add(new File(detail));
-    }
-            
+        System.out.println("File created successfully.");
+    }        
     public static void mkdir(Directory current,String detail) {
-        
         current.add(new Directory(detail));
-        // d1.add(current);
-        
+        System.out.println("Directory created successfully.");
     }
     public static void rmdir() {
           
