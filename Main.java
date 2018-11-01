@@ -1,12 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package projectfinal;
 
 import java.util.Scanner;
-public class ProjectFinal {
+
+/**
+ *
+ * @author tappel2
+ */
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    static Directory root = new Directory("H:/");
+    static Directory current = root;
+    static Directory parent = root;
     public static void main(String[] args) {
          Scanner scan = new Scanner(System.in);
          Directory root = new Directory("H:/");
-         Directory current=root;
+
         /*ArrayList<Directory> d1 = new ArrayList<Directory>(); this is to keep a list of arrays so commands like rmdir, mdkir, and cd can be coded easier */
+        
         System.out.println("Possible Commands");
         System.out.println("---------------------");
         System.out.println("ls: List directories");
@@ -16,7 +34,6 @@ public class ProjectFinal {
         System.out.println("mkdir: create directory");
         System.out.println("rmdir: remove directory");
         System.out.println("cat: reads content of file");
-        System.out.println("exit: exits the simulation");
         System.out.println("---------------------");
         //System.out.println("Type rmdir to delete a directory."); We need to figure out how to do this
         //Input
@@ -41,13 +58,14 @@ public class ProjectFinal {
                     pwd();
                     break;
                 case "cd":
-                    cd(root,current, detail);
+                    
+                    cd(current,parent, detail);
                     break;
                 case "touch":
                     touch(current,detail);
                     break;
                 case "mkdir":
-                    mkdir(current,detail);
+                    mkdir(parent,detail);
                     break;
                 case "rmdir":
                     
@@ -106,22 +124,30 @@ public class ProjectFinal {
          */
     }
 
-    public static void ls(Directory current) {
-        current.printTree();
+    public static void ls(Directory dir) {
+        dir.printTree();
     }
     public static void pwd() {
         System.out.println("Working Directory: " + System.getProperty("user.dir"));
     }
-    public static void cd(Directory root, Directory current, String detail) {
+    public static void cd(Directory cdir, Directory parent, String detail) {
         
+         Directory temp=new Directory(detail);
+         parent=current;
+        current=temp;
+        current.setRoot(parent);
+        //ls(current);
     }
     public static void touch(Directory current,String detail) {
-        current.add(new File(detail));
-        System.out.println("File created successfully.");
-    }        
-    public static void mkdir(Directory current,String detail) {
-        current.add(new Directory(detail));
-        System.out.println("Directory created successfully.");
+        current.add(new File(detail+".txt"));
+    }
+            
+    public static void mkdir(Directory dir,String detail) {
+        
+        //current=new Directory(detail);
+        dir.add(new Directory(detail));
+        // d1.add(current);
+        
     }
     public static void rmdir() {
           
