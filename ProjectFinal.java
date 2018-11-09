@@ -172,7 +172,7 @@ public class ProjectFinal {
     public static void mkdir(String detail) {
 
         //current=new Directory(detail);
-        if (detail.equals("..") || detail.equals("")) //not allowed to name a directory ".."
+        if (detail.equals("..") || detail.equals("") || detail.equals(" ")) //not allowed to name a directory ".." or not name it at all
         {
             System.out.println("Invalid Directory Name");
         } else {
