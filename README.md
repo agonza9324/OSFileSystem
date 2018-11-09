@@ -3,3 +3,5 @@ This repo is a space for us all to contribute to the operating systems file syst
  
  
 The source files are from an open source project found online. The main file was edited except for the commented out sections which are from the original project. 
+
+*NOTE*: ProjectFinal.java contains the main method
