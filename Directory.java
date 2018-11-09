@@ -42,6 +42,7 @@ public class Directory extends Node {
         System.out.println(sb.toString());
     }
 
+
     private void printDirectoryTree(Node node, int indent, StringBuilder sb) {
         sb.append(getIndentString(indent));
         sb.append("+--");

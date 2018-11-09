@@ -2,6 +2,7 @@ package projectfinal;
 
 
 
+import projectfinal.Directory;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +11,6 @@ import java.time.LocalDateTime;
  */
 public abstract class Node implements Comparable<Node> {
     private Directory root;
-    private Directory parent;
     private String name;
     private LocalDateTime created;
     private LocalDateTime lastUpdated;
@@ -22,18 +22,25 @@ public abstract class Node implements Comparable<Node> {
         this.lastUpdated = LocalDateTime.now();
         this.lastAccessed = LocalDateTime.now();
     }
-    
+
     public boolean isDirectory() {
 
         return this instanceof Directory;
+    }
+    public boolean isFile() {
+
+        return this instanceof File;
     }
 
     public String getPath() {
 
         return root != null ? root.getPath() + "/" + name : name;
     }
-    
-    public Node getParent() {
+
+    //public Node getParent() {
+    //    return root;
+    //}
+    public Directory getParent() {
         return root;
     }
 
@@ -68,10 +75,10 @@ public abstract class Node implements Comparable<Node> {
     @Override
     public String toString() {
         return "root=" + root +
-                ", \nname='" + name;// + '\'' +
-                //", \ncreated=" + created +
-                //", \nlastUpdated=" + lastUpdated +
-                //", \nlastAccessed=" + lastAccessed;
+                ", \nname='" + name;/* + '\'' +
+                ", \ncreated=" + created +
+                ", \nlastUpdated=" + lastUpdated +
+                ", \nlastAccessed=" + lastAccessed;*/
 
     }
 }
