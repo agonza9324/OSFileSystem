@@ -1,7 +1,6 @@
-
 package projectfinal;
-import java.util.*;
 
+import java.util.*;
 
 /**
  *
@@ -15,12 +14,12 @@ public class ProjectFinal {
     static Directory root = new Directory("H:/");
     static Directory current = root;
     static Directory parent = root;
+
     public static void main(String[] args) {
-         Scanner scan = new Scanner(System.in);
-         Directory root = new Directory("H:/");
+        Scanner scan = new Scanner(System.in);
+        Directory root = new Directory("H:/");
 
         /*ArrayList<Directory> d1 = new ArrayList<Directory>(); this is to keep a list of arrays so commands like rmdir, mdkir, and cd can be coded easier */
-        
         System.out.println("Possible Commands");
         System.out.println("---------------------");
         System.out.println("ls: List directories");
@@ -35,18 +34,19 @@ public class ProjectFinal {
         //Input
         String temp = scan.nextLine();
         String choice;
-        String detail="";
+        String detail = "";
+
         if (temp.contains(" ")) // if its "mkdir tacos"
         {
-        choice = temp.substring(0, temp.indexOf(' ')); // mkdir taco tuesday: captures "mkdir"
-        detail = temp.substring(temp.indexOf(' ') + 1);// mkdir taco tuesday: captures "taco tuesday"
+            choice = temp.substring(0, temp.indexOf(' ')); // mkdir taco tuesday: captures "mkdir"
+            detail = temp.substring(temp.indexOf(' ') + 1);// mkdir taco tuesday: captures "taco tuesday"
+
+        } else {
+            choice = temp; // if there isn't detail, so like "ls"
         }
-        else
-            choice=temp; // if there isn't detail, so like "ls"
         while (true) {
-            
-            switch(choice)
-            {
+
+            switch (choice) {
                 case "ls":
                     ls(current);
                     break;
@@ -54,7 +54,7 @@ public class ProjectFinal {
                     pwd();
                     break;
                 case "cd":
-                    
+
                     cd(detail);
                     break;
                 case "touch":
@@ -64,7 +64,7 @@ public class ProjectFinal {
                     mkdir(detail);
                     break;
                 case "rmdir":
-                    
+
                     break;
                 case "cat":
                     cat();
@@ -76,19 +76,18 @@ public class ProjectFinal {
                     System.out.println("Invalid Command");
             }
 
-        //Input    
-        temp = scan.nextLine();
-        if (temp.contains(" "))
-        {
-        choice = temp.substring(0, temp.indexOf(' ')); // mkdir tacos: captures "mkdir"
-        detail = temp.substring(temp.indexOf(' ') + 1);// mkdir taco tuesday: captures "taco tuesday"
+            //Input    
+            temp = scan.nextLine();
+            if (temp.contains(" ")) {
+                choice = temp.substring(0, temp.indexOf(' ')); // mkdir tacos: captures "mkdir"
+                detail = temp.substring(temp.indexOf(' ') + 1);// mkdir taco tuesday: captures "taco tuesday"
+
+            } else {
+                choice = temp; // if there isn't detail, so like "ls"
+            }
+
         }
-        else
-            choice=temp; // if there isn't detail, so like "ls"
-        
-        
-        }
-        
+
 
         /* this is old code that came with the project
         Directory root = new Directory("root");
@@ -118,10 +117,12 @@ public class ProjectFinal {
         dir.printTree();
         //dir.getNodes();
     }
+
     public static void pwd() {
         System.out.println("Working Directory: " + current.getPath());
         //System.out.println("Working Directory: " + System.getProperty("user.dir"));
     }
+
     public static void cd(String detail) {
 
         Set<Node> nodes;
@@ -130,56 +131,63 @@ public class ProjectFinal {
 
         Iterator<Node> iterator = nodes.iterator();
         boolean flag = false; //holds boolean if the directory is there to be changed to, and if its a directory
-        Node temp=new Directory(detail); //arbitrary intializing temp
+        Node temp = new Directory(detail); //arbitrary intializing temp
         while (iterator.hasNext()) { //iterates through nodes, so it doesn't hit null
-            
-             temp = iterator.next(); //sets Node temp = to the next node
+
+            temp = iterator.next(); //sets Node temp = to the next node
 
             if (detail.equals(temp.getName()) && temp.isDirectory()) { //cd "name" if name has been added and actually is a directory
                 flag = true; //flag variable if condition above is true
                 break; // breaks so it holds the correct directory in temp
-                
+
             }
         }
         if (detail.equals("..")) {
-            
+
             current = parent;
-            parent=parent.getParent();
+            parent = parent.getParent();
             current.setRoot(parent);
-            
+
         }
-            
-            if (flag) { //if the directory was found earlier
-                parent = current;
-                current = (Directory)temp;
-                current.setRoot(parent);
-            }
-        
+
+        if (flag) { //if the directory was found earlier
+            parent = current;
+            current = (Directory) temp;
+            current.setRoot(parent);
+        }
+
         //ls(current);*/
     }
+
     public static void touch(String detail) {
-        if(!detail.equals("..")) //not allowed to name a file".."
-            current.add(new File(detail+".txt"));
-        else
-            System.out.println("Not allowed");
+        if (detail.equals("..") || detail.equals("") || detail.equals(" ")) //not allowed to name a file".." or not name it at all
+        {
+            System.out.println("Invalid File Name");
+        } else {
+            current.add(new File(detail + ".txt"));
+        }
+
     }
-            
+
     public static void mkdir(String detail) {
-        
+
         //current=new Directory(detail);
-        if(!detail.equals("..")) //not allowed to name a directory ".."
+        if (detail.equals("..") || detail.equals("")) //not allowed to name a directory ".."
+        {
+            System.out.println("Invalid Directory Name");
+        } else {
             current.add(new Directory(detail));
-        else
-            System.out.println("Not allowed");
+
+        }
         // d1.add(current);
-        
+
     }
+
     public static void rmdir() {
-          
+
     }
+
     public static void cat() {
-        
+
     }
 }
-       
-
