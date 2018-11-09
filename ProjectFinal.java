@@ -6,7 +6,6 @@ import java.util.*;
 /**
  *
  * @author tappel2
- *Contains Main
  */
 public class ProjectFinal {
 
@@ -131,41 +130,47 @@ public class ProjectFinal {
 
         Iterator<Node> iterator = nodes.iterator();
         boolean flag = false; //holds boolean if the directory is there to be changed to, and if its a directory
-        Node temp=new Directory(detail);
-        while (iterator.hasNext()) {
-             temp = iterator.next();
-            if (detail.equals(temp.getName()) && temp.isDirectory()) {
-                flag = true;
+        Node temp=new Directory(detail); //arbitrary intializing temp
+        while (iterator.hasNext()) { //iterates through nodes, so it doesn't hit null
+            
+             temp = iterator.next(); //sets Node temp = to the next node
 
-                //System.out.println(iterator);
+            if (detail.equals(temp.getName()) && temp.isDirectory()) { //cd "name" if name has been added and actually is a directory
+                flag = true; //flag variable if condition above is true
+                break; // breaks so it holds the correct directory in temp
+                
             }
         }
         if (detail.equals("..")) {
-            //Directory temp=parent;
+            
             current = parent;
             parent=parent.getParent();
             current.setRoot(parent);
             
-        } else {
-            //System.out.println("Does the directory exist?" + flag);
-            if (flag) {
-                //Directory temp = new Directory(detail);
-
+        }
+            
+            if (flag) { //if the directory was found earlier
                 parent = current;
                 current = (Directory)temp;
                 current.setRoot(parent);
             }
-        }
+        
         //ls(current);*/
     }
     public static void touch(String detail) {
-        current.add(new File(detail+".txt"));
+        if(!detail.equals("..")) //not allowed to name a file".."
+            current.add(new File(detail+".txt"));
+        else
+            System.out.println("Not allowed");
     }
             
     public static void mkdir(String detail) {
         
         //current=new Directory(detail);
-        current.add(new Directory(detail));
+        if(!detail.equals("..")) //not allowed to name a directory ".."
+            current.add(new Directory(detail));
+        else
+            System.out.println("Not allowed");
         // d1.add(current);
         
     }
