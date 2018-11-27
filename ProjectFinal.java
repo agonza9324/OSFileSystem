@@ -28,6 +28,7 @@ public class ProjectFinal {
         System.out.println("touch: create file");
         System.out.println("mkdir: create directory");
         System.out.println("rmdir: remove directory");
+        System.out.println("rmfil: remove file");
         System.out.println("cat: reads content of file");
         System.out.println("---------------------");
         //System.out.println("Type rmdir to delete a directory."); We need to figure out how to do this
@@ -64,6 +65,9 @@ public class ProjectFinal {
                     mkdir(detail);
                     break;
                 case "rmdir":
+
+                    break;
+                case "rmfil":
 
                     break;
                 case "cat":
@@ -185,6 +189,10 @@ public class ProjectFinal {
 
     public static void rmdir() {
 
+    }
+    
+    public static void rmfil() {
+        
     }
 
     public static void cat() {
