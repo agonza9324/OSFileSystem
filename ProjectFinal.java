@@ -145,19 +145,12 @@ public class ProjectFinal {
             }
         }
 
-     /**8   if (parent.getName() == "H:/" && detail.equals("..")) {
-           
+     
             
-            System.out.println("\033[31;1mDo not make further cd\033[30;2m!");
-            current = parent;
-            parent = parent.getParent();
-            current.setRoot(parent);
-        }**/
-            
-        if (detail.equals("..")) { //else if
-            if (parent.getName() == "H:/")
+        if (detail.equals("..")) { 
+            if (parent.getName() == "H:/") //if the parent name is H:/ tells the user not to do more cd .. commands
                 System.out.println("\033[31;1mDo not make further cd\033[30;2m!");
-           //System.out.println(parent.getName()); // Debug
+           //System.out.println(parent.getName());                                          // Debug
             current = parent;
             parent = parent.getParent();
             current.setRoot(parent);
