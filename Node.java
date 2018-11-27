@@ -1,5 +1,13 @@
 package projectfinal;
 
+public abstract class Node implements Comparable<Node> {
+
+    private Directory root;
+    private String name;
+
+    public Node(String name) {
+        this.name = name;
+
 
 
 import projectfinal.Directory;
@@ -21,12 +29,14 @@ public abstract class Node implements Comparable<Node> {
         this.created = LocalDateTime.now();
         this.lastUpdated = LocalDateTime.now();
         this.lastAccessed = LocalDateTime.now();
+
     }
 
     public boolean isDirectory() {
 
         return this instanceof Directory;
     }
+
     public boolean isFile() {
 
         return this instanceof File;
@@ -40,6 +50,7 @@ public abstract class Node implements Comparable<Node> {
     //public Node getParent() {
     //    return root;
     //}
+
     public Directory getParent() {
         return root;
     }
@@ -59,6 +70,14 @@ public abstract class Node implements Comparable<Node> {
     public void setRoot(Directory root) {
         this.root = root;
     }
+
+    @Override
+    public String toString() {
+        return "root=" + root
+                + ", \nname='" + name;
+
+    }
+}
 
     public LocalDateTime getCreated() {
         return created;
@@ -82,3 +101,4 @@ public abstract class Node implements Comparable<Node> {
 
     }
 }
+

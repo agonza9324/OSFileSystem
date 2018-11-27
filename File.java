@@ -1,11 +1,17 @@
 package projectfinal;
 
+
+
+public class File extends Node {
+    private String content; 
+
 /**
  * @author Bazlur Rahman Rokon
  * @since 3/31/17.
  */
 public class File extends Node {
     private String content; /// for simplicity
+
 
     public File(String name, String content) {
         super(name);
