@@ -1,15 +1,10 @@
 package projectfinal;
 
-
-
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * @author Bazlur Rahman Rokon
- * @since 3/31/17.
- */
 public class Directory extends Node {
+
     private Set<Node> nodes;
 
     public Directory(String path) {
@@ -21,9 +16,11 @@ public class Directory extends Node {
         node.setRoot(this);
         nodes.add(node);
     }
-    public void remove(Node node){
+
+    public void remove(Node node) {
         nodes.remove(node);
     }
+
     public Set<Node> getNodes() {
         return nodes;
     }
@@ -43,7 +40,6 @@ public class Directory extends Node {
         printDirectoryTree(this, indent, sb);
         System.out.println(sb.toString());
     }
-
 
     private void printDirectoryTree(Node node, int indent, StringBuilder sb) {
         sb.append(getIndentString(indent));

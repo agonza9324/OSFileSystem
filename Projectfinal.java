@@ -1,21 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projectfinal;
 
 import java.util.*;
 
-/**
- *
- * @author tappel2
- */
 public class Projectfinal {
 
-    /**
-     * @param args the command line arguments
-     */
     static Directory root = new Directory("H:/");
     static Directory current = root;
     static Directory parent = root;
@@ -24,11 +13,8 @@ public class Projectfinal {
         Scanner scan = new Scanner(System.in);
         Directory root = new Directory("H:/");
 
-        /*ArrayList<Directory> d1 = new ArrayList<Directory>(); this is to keep a list of arrays so commands like rmdir, mdkir, and cd can be coded easier */
         help(); // prints help menu
-        //System.out.println("\033[31;1mDo not make further cd\033[30;2m!");
-        //System.out.println("Type rmdir to delete a directory."); We need to figure out how to do this
-        //Input
+
         String temp = scan.nextLine();
         String choice;
         String detail = "";
@@ -66,8 +52,11 @@ public class Projectfinal {
                 case "rmfil":
                     rmfil(detail);
                     break;
-                case "rename":
-                    rename(detail);
+                case "cat":
+                    cat(detail);
+                    break;
+                case "nano":
+                    nano(detail);
                     break;
                 case "help":
                     help();
@@ -91,29 +80,6 @@ public class Projectfinal {
 
         }
 
-
-        /* this is old code that came with the project
-        Directory root = new Directory("root");
-        
-        File file = new File("profile.jpg");
-        // root.add(file);
-        Directory movie = new Directory("movie");
-        //root.add(movie);
-        Directory englishMovie = new Directory("english");
-        englishMovie.add(new File("IronFist.mp4"));
-        englishMovie.add(new File("The Shawshank Redemption.mp4"));
-        englishMovie.add(new File("ZotaPia.mp4"));
-        File despicableMe = new File("DespicableMe.mp4");
-        englishMovie.add(despicableMe);
-        movie.add(englishMovie);
-        Directory banglaMovie = new Directory("Bangla");
-        banglaMovie.add(new File("The Clay Bird.mp4"));
-        banglaMovie.add(new File("Jibon Thekey Neya.mp4"));
-        movie.add(banglaMovie);
-        //root.printTree();
-        //System.out.println("name: " + movie.getName());
-        //System.out.println("Created: " + movie.getCreated());
-         */
     }
 
     public static void ls(Directory dir) {
@@ -123,14 +89,12 @@ public class Projectfinal {
 
     public static void pwd() {
         System.out.println("Working Directory: " + current.getPath());
-        //System.out.println("Working Directory: " + System.getProperty("user.dir"));
     }
 
     public static void cd(String detail) {
 
         Set<Node> nodes;
         nodes = current.getNodes();
-        //System.out.println("Is nodes empty?"+ nodes.isEmpty());
 
         Iterator<Node> iterator = nodes.iterator();
         boolean flag = false; //holds boolean if the directory is there to be changed to, and if its a directory
@@ -145,23 +109,18 @@ public class Projectfinal {
 
             }
         }
-        
-        if (detail.equals("..") & current.getName() == "H:/") {
-           
-            
+
+        if (detail.equals("..") & current.getName().equals("H:/")) {
+
             System.out.println("\033[31;1m Error: You're currently at the root!\033[30;2m");
-            /*current = parent;
-            parent = parent.getParent();
-            current.setRoot(parent);*/
-        }
-            
-        else if (detail.equals("..")) {
-            
+
+        } else if (detail.equals("..")) {
+
             //System.out.println(parent.getName());
             current = parent;
             parent = parent.getParent();
             current.setRoot(parent);
-            
+
         }
 
         if (flag) { //if the directory was found earlier
@@ -170,7 +129,6 @@ public class Projectfinal {
             current.setRoot(parent);
         }
 
-        //ls(current);*/
     }
 
     public static void touch(String detail) {
@@ -198,7 +156,7 @@ public class Projectfinal {
     }
 
     public static void rmdir(String detail) {
-      
+
         Set<Node> nodes;
         nodes = current.getNodes();
         //System.out.println("Is nodes empty?"+ nodes.isEmpty());
@@ -215,13 +173,13 @@ public class Projectfinal {
 
             }
         }
-        if(true == flag) {
+        if (true == flag) {
             current.remove(new Directory(detail));
-        } 
+        }
     }
-    
+
     public static void rmfil(String detail) {
-        
+
         Set<Node> nodes;
         nodes = current.getNodes();
         //System.out.println("Is nodes empty?"+ nodes.isEmpty());
@@ -238,15 +196,59 @@ public class Projectfinal {
 
             }
         }
-        if (true == flag)
-        current.remove(new File(detail));
+        if (true == flag) {
+            current.remove(new File(detail));
+        }
     }
-    public static void rename(String detail)
-    {
-        System.out.println("hi");
+
+    public static void cat(String detail) {
+        Set<Node> nodes;
+        nodes = current.getNodes();
+        Iterator<Node> iterator = nodes.iterator();
+        boolean flagfile = false; //holds boolean if the directory is there to be changed to, and if its a directory
+        Node tempf = new File(detail); //arbitrary intializing temp
+        while (iterator.hasNext()) { //iterates through nodes, so it doesn't hit null
+            tempf = iterator.next(); //sets Node temp = to the next node
+
+            if (detail.equals(tempf.getName()) && tempf.isFile()) { //cd "name" if name has been added and actually is a directory
+                flagfile = true; //flag variable if condition above is true
+                break; // breaks so it holds the correct directory in temp
+
+            }
+        }
+        if (flagfile == true) {
+            File temp = (File) tempf;
+            System.out.println(temp.getContent());
+        }
     }
-    public static void help()
-    {
+
+    public static void nano(String detail) {
+
+        Scanner scan = new Scanner(System.in);
+        Set<Node> nodes;
+        nodes = current.getNodes();
+        Iterator<Node> iterator = nodes.iterator();
+        boolean flagfile = false; //holds boolean if the directory is there to be changed to, and if its a directory
+        Node tempf = new File(detail); //arbitrary intializing temp
+        while (iterator.hasNext()) { //iterates through nodes, so it doesn't hit null
+            tempf = iterator.next(); //sets Node temp = to the next node
+
+            if (detail.equals(tempf.getName()) && tempf.isFile()) { //cd "name" if name has been added and actually is a directory
+                flagfile = true; //flag variable if condition above is true
+                break; // breaks so it holds the correct directory in temp
+
+            }
+        }
+        if (flagfile == true) {
+            System.out.println("Enter the text you want to add");
+            String txt = scan.nextLine();
+            File temp = (File) tempf;
+            temp.setContent(txt);
+        }
+
+    }
+
+    public static void help() {
         System.out.println("Possible Commands");
         System.out.println("---------------------");
         System.out.println("ls: List directories");
@@ -256,11 +258,10 @@ public class Projectfinal {
         System.out.println("mkdir: create directory");
         System.out.println("rmdir: remove directory");
         System.out.println("rmfil: remove file");
+        System.out.println("nano: write to a text file");
+        System.out.println("cat: reads from a file");
         System.out.println("help: help menu");
         System.out.println("exit: terminates program");
         System.out.println("---------------------");
     }
-    }
-
-    
-
+}
